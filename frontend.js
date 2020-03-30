@@ -2,8 +2,8 @@
 	$(document).ready(function() {
 		var
 		closeOpenBoxes = function($exclude) {
-			if ($('.coll-wrap.coll-open').not($exclude).length) {
-				$('.coll-wrap.coll-open').not($exclude).each(function(i, el){
+			if ($('.ecll-wrap.ecll-open').not($exclude).length) {
+				$('.ecll-wrap.ecll-open').not($exclude).each(function(i, el){
 					closeBox($(el));
 				});
 			}
@@ -12,39 +12,39 @@
 			var
 			effect_duration = 500;
 
-			$wrap.removeClass('coll-open');
+			$wrap.removeClass('ecll-open');
 			$wrap.find('.open-icon').hide();
 			$wrap.find('.close-icon').show();
 
-			$wrap.find('.coll-download-links').slideDown(effect_duration, function(){
-				$wrap.removeClass('coll-animating');
+			$wrap.find('.ecll-download-links').slideDown(effect_duration, function(){
+				$wrap.removeClass('ecll-animating');
 			});
 		},
 		openBox = function($wrap) {
 			var
 			effect_duration = 500;
 
-			$wrap.addClass('coll-open');
+			$wrap.addClass('ecll-open');
 			$wrap.find('.open-icon').show();
 			$wrap.find('.close-icon').hide();
 
-			$wrap.find('.coll-download-links').slideUp(effect_duration, function(){
-				$wrap.removeClass('coll-animating');
+			$wrap.find('.ecll-download-links').slideUp(effect_duration, function(){
+				$wrap.removeClass('ecll-animating');
 			});
 		};
 
 		/* toggle button */
-		$(document.body).on('click', '.coll-title-wrapper', function(){
-			var $wrap = $(this).closest('.coll-wrap');
+		$(document.body).on('click', '.ecll-title-wrapper', function(){
+			var $wrap = $(this).closest('.ecll-wrap');
 
 			closeOpenBoxes($wrap);
 
-			if ($wrap.hasClass('coll-animating')) {
+			if ($wrap.hasClass('ecll-animating')) {
 				return false;
 			}
-			$wrap.addClass('coll-animating');
+			$wrap.addClass('ecll-animating');
 
-			if (! $wrap.hasClass('coll-open')) {
+			if (! $wrap.hasClass('ecll-open')) {
 				openBox($wrap);
 			} else {
 				closeBox($wrap);

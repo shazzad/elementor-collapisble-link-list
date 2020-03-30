@@ -27,7 +27,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 	 * @return string
 	 */
 	public function get_title() {
-		return __( 'Collapsible Link List', 'coll' );
+		return __( 'Collapsible Link List', 'ecll' );
 	}
 
 
@@ -66,16 +66,16 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 		);
 		$this->add_control(
 			'title', [
-				'label' => __( 'Title', 'coll' ),
+				'label' => __( 'Title', 'ecll' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Title' , 'coll' ),
+				'default' => __( 'Title' , 'ecll' ),
 				'label_block' => true,
 			]
 		);
 		$this->add_control(
 			'title_icon_open',
 			[
-				'label' => __( 'Icon (Open)', 'coll' ),
+				'label' => __( 'Icon (Open)', 'ecll' ),
 				'type' => \Elementor\Controls_Manager::ICONS,
 				'default' => array(
 					'value' => 'fas fa-plus',
@@ -86,7 +86,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'title_icon_close',
 			[
-				'label' => __( 'Icon (Close)', 'coll' ),
+				'label' => __( 'Icon (Close)', 'ecll' ),
 				'type' => \Elementor\Controls_Manager::ICONS,
 				'default' => array(
 					'value' => 'fas fa-minus',
@@ -107,7 +107,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'download_icon',
 			[
-				'label' => __( 'Download Icon', 'coll' ),
+				'label' => __( 'Download Icon', 'ecll' ),
 				'type' => \Elementor\Controls_Manager::ICONS,
 				'default' => array(
 					'value' => 'fas fa-arrow-down',
@@ -129,23 +129,23 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 
 		$repeater->add_control(
 			'name', [
-				'label' => __( 'Name', 'coll' ),
+				'label' => __( 'Name', 'ecll' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Download Name' , 'coll' ),
+				'default' => __( 'Download Name' , 'ecll' ),
 				'label_block' => true,
 			]
 		);
 		$repeater->add_control(
 			'description', [
-				'label' => __( 'Description', 'coll' ),
+				'label' => __( 'Description', 'ecll' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'default' => __( 'Download Description' , 'coll' ),
+				'default' => __( 'Download Description' , 'ecll' ),
 				'label_block' => true,
 			]
 		);
 		$repeater->add_control(
 			'link', [
-				'label' => __( 'Link', 'coll' ),
+				'label' => __( 'Link', 'ecll' ),
 				'type' => \Elementor\Controls_Manager::URL,
 				'label_block' => true,
 				'show_external' => true,
@@ -160,18 +160,18 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'downloads',
 			[
-				'label' => __( 'Downloads', 'coll' ),
+				'label' => __( 'Downloads', 'ecll' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'show_label' => false,
 				'default' => [
 					[
-						'name' => __( 'Download #1', 'coll' ),
-						'description' => __( 'Download description.', 'coll' ),
+						'name' => __( 'Download #1', 'ecll' ),
+						'description' => __( 'Download description.', 'ecll' ),
 					],
 					[
-						'name' => __( 'Download #2', 'coll' ),
-						'description' => __( 'Some description.', 'coll' ),
+						'name' => __( 'Download #2', 'ecll' ),
+						'description' => __( 'Some description.', 'ecll' ),
 					],
 				],
 				'title_field' => '{{{ name }}}',
@@ -231,7 +231,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'title_typography',
 				'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_4,
-				'selector' => '{{WRAPPER}} .coll-title-text',
+				'selector' => '{{WRAPPER}} .ecll-title-text',
 				'fields_options' => [
 					'font_style' => [
 						'default' => 'italic',
@@ -246,7 +246,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .coll-title-text, {{WRAPPER}} .coll-title-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-title-text, {{WRAPPER}} .ecll-title-icon' => 'color: {{VALUE}};',
 				],
 				'default' => '#fff'
 			]
@@ -261,7 +261,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 					'value' => \Elementor\Scheme_Color::COLOR_4,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .coll-title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-title' => 'background-color: {{VALUE}};',
 				],
 				'default' => '#3B4961'
 			]
@@ -271,7 +271,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name' => 'title_border',
-				'selector' => '{{WRAPPER}} .coll-title',
+				'selector' => '{{WRAPPER}} .ecll-title',
 				'separator' => 'before',
 				'fields_options' => [
 					'border' => [
@@ -297,7 +297,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .coll-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ecll-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'default' => array(
 		            'unit' => 'px',
@@ -314,7 +314,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'title_box_shadow',
-				'selector' => '{{WRAPPER}} .coll-title',
+				'selector' => '{{WRAPPER}} .ecll-title',
 			]
 		);
 
@@ -325,7 +325,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .coll-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ecll-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 				'default' => array(
@@ -346,7 +346,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .coll-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ecll-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 				'default' => array(
@@ -412,7 +412,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'download_text_typography',
 				'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_4,
-				'selector' => '{{WRAPPER}} .coll-download-text',
+				'selector' => '{{WRAPPER}} .ecll-download-text',
 			]
 		);
 
@@ -432,7 +432,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .coll-download-text, {{WRAPPER}} .elementor-button-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-download-text, {{WRAPPER}} .elementor-button-icon' => 'color: {{VALUE}};',
 				],
 				'default' => '#54595F'
 			]
@@ -466,7 +466,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'label' => __( 'Text Color', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} a.coll-download-link:hover .elementor-button-text, {{WRAPPER}} .elementor-button:hover .elementor-button-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} a.ecll-download-link:hover .elementor-button-text, {{WRAPPER}} .elementor-button:hover .elementor-button-icon' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -477,7 +477,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'label' => __( 'Background Color', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} a.coll-download-link:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a.ecll-download-link:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -488,7 +488,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'label' => __( 'Border Color', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} a.coll-download-link:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} a.ecll-download-link:hover' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -521,7 +521,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} a.coll-download-link' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a.ecll-download-link' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -530,7 +530,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'download_box_shadow',
-				'selector' => '{{WRAPPER}} a.coll-download-link',
+				'selector' => '{{WRAPPER}} a.ecll-download-link',
 				'default' => array(
 		            'unit' => 'px',
 		            'top' => 0,
@@ -549,7 +549,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} a.coll-download-link, {{WRAPPER}} .elementor-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a.ecll-download-link, {{WRAPPER}} .elementor-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 				'default' => array(
@@ -570,7 +570,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} a.coll-download-link, {{WRAPPER}} .elementor-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a.ecll-download-link, {{WRAPPER}} .elementor-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 				'default' => array(
@@ -590,28 +590,28 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute( 'wrapper', 'class', 'coll-wrap' );
+		$this->add_render_attribute( 'wrapper', 'class', 'ecll-wrap' );
 
-		$this->add_render_attribute( 'title-wrapper', 'class', array( 'elementor-button-wrapper', 'coll-title-wrapper' ) );
-		$this->add_render_attribute( 'title', 'class', array( 'elementor-button', 'coll-title' ) );
+		$this->add_render_attribute( 'title-wrapper', 'class', array( 'elementor-button-wrapper', 'ecll-title-wrapper' ) );
+		$this->add_render_attribute( 'title', 'class', array( 'elementor-button', 'ecll-title' ) );
 		$this->add_render_attribute( 'title', 'style', 'width:100%' );
 
-		$this->add_render_attribute( 'title-text', 'class', array( 'elementor-button-text', 'coll-title-text', 'elementor-align-'. $settings['title_text_alignment'] ) );
+		$this->add_render_attribute( 'title-text', 'class', array( 'elementor-button-text', 'ecll-title-text', 'elementor-align-'. $settings['title_text_alignment'] ) );
 
-		$this->add_render_attribute( 'title-icon-wrapper', 'class', array( 'elementor-button-icon', 'elementor-align-icon-'. $settings['title_icon_alignment'], 'coll-title-icon-wrapper' ) );
-		$this->add_render_attribute( 'title-icon-open', 'class', array( $settings['title_icon_open']['value'], 'coll-title-icon open-icon' ) );
+		$this->add_render_attribute( 'title-icon-wrapper', 'class', array( 'elementor-button-icon', 'elementor-align-icon-'. $settings['title_icon_alignment'], 'ecll-title-icon-wrapper' ) );
+		$this->add_render_attribute( 'title-icon-open', 'class', array( $settings['title_icon_open']['value'], 'ecll-title-icon open-icon' ) );
 		$this->add_render_attribute( 'title-icon-open', 'style', 'display:none' );
-		$this->add_render_attribute( 'title-icon-close', 'class', array( $settings['title_icon_close']['value'], 'coll-title-icon close-icon' ) );
+		$this->add_render_attribute( 'title-icon-close', 'class', array( $settings['title_icon_close']['value'], 'ecll-title-icon close-icon' ) );
 
 		$this->add_render_attribute( 'download-wrapper', 'class', 'elementor-button-wrapper' );
-		$this->add_render_attribute( 'download-link', 'class', array( 'elementor-button', 'coll-download-link' ) );
+		$this->add_render_attribute( 'download-link', 'class', array( 'elementor-button', 'ecll-download-link' ) );
 		$this->add_render_attribute( 'download-link', 'style', 'display:block' );
 
 		$this->add_render_attribute( 'download-icon-wrapper', 'class', array( 'elementor-button-icon', 'elementor-align-icon-'. $settings['download_icon_alignment'] ) );
 		$this->add_render_attribute( 'download-icon', 'class', 'download-icon' );
 		$this->add_render_attribute( 'download-icon', 'class', $settings['download_icon']['value'] );
 
-		$this->add_render_attribute( 'download-text', 'class', array( 'elementor-button-text', 'elementor-align-'. $settings['download_text_alignment'], 'coll-download-text' ) );
+		$this->add_render_attribute( 'download-text', 'class', array( 'elementor-button-text', 'elementor-align-'. $settings['download_text_alignment'], 'ecll-download-text' ) );
 
 		?><div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 			<div <?php echo $this->get_render_attribute_string( 'title-wrapper' ); ?>>
@@ -627,7 +627,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 					</span>
 				</button>
 			</div>
-			<ul class="coll-download-links">
+			<ul class="ecll-download-links">
 			<?php
 			foreach ( $settings['downloads'] as $index => $item ) :
 				if ( empty( $item['link']['url'] ) ) {
