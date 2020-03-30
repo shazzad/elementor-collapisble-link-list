@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name: Element Collapsible Link List
+ * Plugin Name: Elementor Collapsible Link List
  * Plugin URI: https://w4dev.com
  * Description: Custom widget for elementor
  * Version: 1.0.0

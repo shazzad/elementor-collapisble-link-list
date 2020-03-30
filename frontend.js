@@ -13,10 +13,10 @@
 			effect_duration = 500;
 
 			$wrap.removeClass('ecll-open');
-			$wrap.find('.open-icon').hide();
-			$wrap.find('.close-icon').show();
+			$wrap.find('.close-icon').hide();
+			$wrap.find('.open-icon').show();
 
-			$wrap.find('.ecll-download-links').slideDown(effect_duration, function(){
+			$wrap.find('.ecll-download-links').slideUp(effect_duration, function(){
 				$wrap.removeClass('ecll-animating');
 			});
 		},
@@ -25,10 +25,10 @@
 			effect_duration = 500;
 
 			$wrap.addClass('ecll-open');
-			$wrap.find('.open-icon').show();
-			$wrap.find('.close-icon').hide();
+			$wrap.find('.close-icon').show();
+			$wrap.find('.open-icon').hide();
 
-			$wrap.find('.ecll-download-links').slideUp(effect_duration, function(){
+			$wrap.find('.ecll-download-links').slideDown(effect_duration, function(){
 				$wrap.removeClass('ecll-animating');
 			});
 		};

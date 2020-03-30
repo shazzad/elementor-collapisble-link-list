@@ -32,7 +32,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 
 
     public function get_icon() {
-		return 'eicon-insert-image';
+		return 'eicon-post-list';
 	}
 
     public function get_categories() {
@@ -70,6 +70,24 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => __( 'Title' , 'ecll' ),
 				'label_block' => true,
+			]
+		);
+		$this->add_responsive_control(
+			'title_state',
+			[
+				'label' => __( 'Default State', 'elementor' ),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'open' => [
+						'title' => __( 'Open', 'elementor' ),
+						'icon' => 'fa fa-arrow-alt-circle-up',
+					],
+					'close' => [
+						'title' => __( 'Close', 'elementor' ),
+						'icon' => 'fa fa-arrow-alt-circle-down',
+					]
+				],
+				'default' => 'left'
 			]
 		);
 		$this->add_control(
@@ -600,7 +618,16 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 
 		$this->add_render_attribute( 'title-icon-wrapper', 'class', array( 'elementor-button-icon', 'elementor-align-icon-'. $settings['title_icon_alignment'], 'ecll-title-icon-wrapper' ) );
 		$this->add_render_attribute( 'title-icon-open', 'class', array( $settings['title_icon_open']['value'], 'ecll-title-icon open-icon' ) );
-		$this->add_render_attribute( 'title-icon-open', 'style', 'display:none' );
+
+
+		$this->add_render_attribute( 'download-links', 'class', 'ecll-download-links' );
+		if ( 'open' === $settings['title_state'] ) {
+			$this->add_render_attribute( 'wrapper', 'class', 'ecll-open' );
+			$this->add_render_attribute( 'title-icon-open', 'style', 'display:none' );
+		} else {
+			$this->add_render_attribute( 'title-icon-close', 'style', 'display:none' );
+			$this->add_render_attribute( 'download-links', 'style', 'display:none' );
+		}
 		$this->add_render_attribute( 'title-icon-close', 'class', array( $settings['title_icon_close']['value'], 'ecll-title-icon close-icon' ) );
 
 		$this->add_render_attribute( 'download-wrapper', 'class', 'elementor-button-wrapper' );
@@ -627,7 +654,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 					</span>
 				</button>
 			</div>
-			<ul class="ecll-download-links">
+			<ul <?php echo $this->get_render_attribute_string( 'download-links' ); ?>>
 			<?php
 			foreach ( $settings['downloads'] as $index => $item ) :
 				if ( empty( $item['link']['url'] ) ) {
