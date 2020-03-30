@@ -3,7 +3,7 @@
  * Plugin Name: Elementor Collapsible Link List
  * Plugin URI: https://w4dev.com
  * Description: Custom widget for elementor
- * Version: 1.0.0
+ * Version: 1.0.9
  * Author: Shazzad Hossain Khan
  * Author URI: https://shazzad.me
 */
@@ -18,9 +18,7 @@ function ecll_load() {
 }
 
 function ecll_widget_scripts() {
-	wp_register_style( 'ecll-frontend', plugins_url( 'frontend.css', __FILE__ ) );
 	wp_register_script( 'ecll-frontend', plugins_url( 'frontend.js', __FILE__ ), array( 'jquery' ) );
-	wp_enqueue_style( 'ecll-frontend' );
 	wp_enqueue_script( 'ecll-frontend' );
 }
 
