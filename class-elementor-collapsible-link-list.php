@@ -737,14 +737,10 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 
 		$this->add_render_attribute( 'title', 'class', array( 'elementor-button', 'ecll-title' ) );
 		$this->add_render_attribute( 'title', 'style', 'width:100%' );
-
 		$this->add_render_attribute( 'title-text', 'class', array( 'elementor-button-text', 'ecll-title-text', 'elementor-align-'. $settings['title_text_alignment'] ) );
-
 		$this->add_render_attribute( 'title-icon-wrapper', 'class', array( 'elementor-button-icon', 'elementor-align-icon-'. $settings['title_icon_alignment'], 'ecll-title-icon-wrapper' ) );
 		$this->add_render_attribute( 'title-icon-open', 'class', array( $settings['title_icon_open']['value'], 'ecll-title-icon open-icon' ) );
-
-
-		$this->add_render_attribute( 'download-list', 'class', 'ecll-downloads' );
+		$this->add_render_attribute( 'title-icon-close', 'class', array( $settings['title_icon_close']['value'], 'ecll-title-icon close-icon' ) );
 
 		if ( 'open' === $settings['title_state'] ) {
 			$this->add_render_attribute( 'wrapper', 'class', 'ecll-open' );
@@ -754,15 +750,12 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			$this->add_render_attribute( 'download-list', 'style', 'display:none' );
 		}
 
-		$this->add_render_attribute( 'title-icon-close', 'class', array( $settings['title_icon_close']['value'], 'ecll-title-icon close-icon' ) );
-
+		$this->add_render_attribute( 'download-list', 'class', 'ecll-downloads' );
 		$this->add_render_attribute( 'download-list-item', 'class', array( 'ecll-download-item' ) );
 		$this->add_render_attribute( 'download-link', 'class', array( 'elementor-button', 'ecll-download-link' ) );
 		$this->add_render_attribute( 'download-link', 'style', 'display:block' );
-
 		$this->add_render_attribute( 'download-icon-wrapper', 'class', array( 'elementor-button-icon', 'elementor-align-icon-'. $settings['download_icon_alignment'], 'ecll-download-icon' ) );
 		$this->add_render_attribute( 'download-icon', 'class', array( $settings['download_icon']['value'] ) );
-
 		$this->add_render_attribute( 'download-text', 'class', array( 'elementor-button-text', 'elementor-align-'. $settings['download_text_alignment'], 'ecll-download-text' ) );
 
 		?><div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
