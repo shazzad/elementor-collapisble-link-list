@@ -768,12 +768,22 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'name_width', [
 				'label' => __( 'Link Name Width', 'ecll' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem', 'vw' ],
 				'description' => __( 'control the width of name column', 'ecll' ),
-				'devices' => [ 'desktop', 'tablet', 'mobile' ],
-				'label_block' => false,
+				'range' => [
+					'px' => [
+						'min' => 20,
+						'max' => 600,
+					],
+					'vw' => [
+						'min' => 1,
+						'max' => 60,
+						'step' => 1,
+					],
+				],
 				'selectors' => [
-					'{{WRAPPER}} .ecll-link-name' => 'min-width: {{VALUE}}px;max-width: {{VALUE}}px;',
+					'{{WRAPPER}} .ecll-link-name' => 'min-width: {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}};',
 				]
 			]
 		);
@@ -1188,7 +1198,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 					}
 
 					$link_icon = ! empty( $item['link_icon']['value'] ) ? $item['link_icon']['value'] : $settings['link_icon']['value'];
-					$name_width = ! empty( $item['name_width'] ) ? $item['name_width'] . 'px' : 'auto';
 
 					?>
 					<li class="ecll-link-item elementor-repeater-item-<?php echo $item['_id']; ?>">
@@ -1213,7 +1222,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 					}
 
 					$link_icon = ! empty( $item['link_icon']['value'] ) ? $item['link_icon']['value'] : $settings['link_icon']['value'];
-					$name_width = ! empty( $item['name_width'] ) ? $item['name_width'] . 'px' : 'auto';
 					?>
 					<li class="ecll-link-item elementor-repeater-item-<?php echo $item['_id']; ?>">
 						<a <?php echo $this->get_render_attribute_string( 'link-link' ); ?> href="<?php echo esc_url( $item['link']['url'] ); ?>">
@@ -1339,7 +1347,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				<#
 					_.each( primary_links, function( item, index ) {
 						let link_icon = item.link_icon.value ? item.link_icon.value : settings.link_icon.value;
-						let name_width = item.name_width ? item.name_width + 'px' : 'auto';
 					#>
 					<li class="ecll-link-item elementor-repeater-item-{{{ item._id }}}">
 						<a {{{ view.getRenderAttributeString( 'link-link' ) }}} href="{{{ item.link.url }}}">
