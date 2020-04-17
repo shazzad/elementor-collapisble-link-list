@@ -14,7 +14,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 		return __( 'Collapsible Link List', 'ecll' );
 	}
 
-
     public function get_icon() {
 		return 'eicon-post-list';
 	}
@@ -1168,7 +1167,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			}
 		}
 
-		$this->add_render_attribute( 'link-link', 'class', [ 'ecll-link-link' ] );
 
 		$this->add_render_attribute( 'expand-text', 'class', 'ecll-expand-text' );
 		$this->add_render_attribute( 'collapse-text', 'class', 'ecll-collapse-text' );
@@ -1199,9 +1197,13 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 
 					$link_icon = ! empty( $item['link_icon']['value'] ) ? $item['link_icon']['value'] : $settings['link_icon']['value'];
 
+					$link_element = 'link-' . $item['_id'];
+					$this->add_render_attribute( $link_element, 'class', [ 'ecll-link-link' ] );
+					$this->add_link_attributes( $link_element, $item['link'] );
+
 					?>
 					<li class="ecll-link-item elementor-repeater-item-<?php echo $item['_id']; ?>">
-						<a <?php echo $this->get_render_attribute_string( 'link-link' ); ?> href="<?php echo esc_url( $item['link']['url'] ); ?>">
+						<a <?php echo $this->get_render_attribute_string( $link_element ); ?>>
 							<div class="ecll-content-wrapper">
 								<div class="ecll-link-name"><?php echo $item['name']; ?></div>
 								<div class="ecll-link-description"><?php echo $item['description']; ?></div>
@@ -1222,9 +1224,14 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 					}
 
 					$link_icon = ! empty( $item['link_icon']['value'] ) ? $item['link_icon']['value'] : $settings['link_icon']['value'];
+
+					$link_element = 'link-' . $item['_id'];
+					$this->add_render_attribute( $link_element, 'class', [ 'ecll-link-link' ] );
+					$this->add_link_attributes( $link_element, $item['link'] );
+
 					?>
 					<li class="ecll-link-item elementor-repeater-item-<?php echo $item['_id']; ?>">
-						<a <?php echo $this->get_render_attribute_string( 'link-link' ); ?> href="<?php echo esc_url( $item['link']['url'] ); ?>">
+						<a <?php echo $this->get_render_attribute_string( $link_element ); ?>>
 							<div class="ecll-content-wrapper">
 								<div class="ecll-link-name"><?php echo $item['name']; ?></div>
 								<div class="ecll-link-description"><?php echo $item['description']; ?></div>
@@ -1313,10 +1320,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			});
 		}
 
-		view.addRenderAttribute('link-link',{
-			'class': [ 'ecll-link-link' ],
-		});
-
 		view.addRenderAttribute('expand-text',{
 			'class': [ 'ecll-expand-text' ],
 		});
@@ -1347,9 +1350,15 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				<#
 					_.each( primary_links, function( item, index ) {
 						let link_icon = item.link_icon.value ? item.link_icon.value : settings.link_icon.value;
+
+						let link_element = 'link-' + item._id;
+						view.addRenderAttribute(link_element,{
+							'class': [ 'ecll-link-link' ],
+						});
+						view.addRenderAttribute(link_element, item.link);
 					#>
 					<li class="ecll-link-item elementor-repeater-item-{{{ item._id }}}">
-						<a {{{ view.getRenderAttributeString( 'link-link' ) }}} href="{{{ item.link.url }}}">
+						<a {{{ view.getRenderAttributeString( link_element ) }}}>
 							<div class="ecll-content-wrapper">
 								<div class="ecll-link-name" >{{{ item.name }}}</div>
 								<div class="ecll-link-description">{{{ item.description }}}</div>

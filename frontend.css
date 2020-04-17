@@ -1,5 +1,10 @@
 .elementor-widget .ecll-primary-links,
 .elementor-widget .ecll-hidden-links {
+   margin: 0;
+   padding: 0;
+}
+.elementor-widget .ecll-primary-links li,
+.elementor-widget .ecll-hidden-links li{
    list-style-type: none;
    margin: 0;
    padding: 0;
