@@ -58,9 +58,26 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			]
 		);
 		$this->add_control(
+			'title_icon',
+			[
+				'label' => __( 'Icon', 'ecll' ),
+				'description' => __( 'Displayed before the title', 'ecll' ),
+				'type' => Controls_Manager::ICONS,
+				'fa4compatibility' => 'icon',
+				'default' => [
+					'value' => '',
+            		'library' => ''
+				],
+				'label_block' => false,
+				'skin' => 'inline',
+				'exclude_inline_options' => [ 'svg' ]
+			]
+		);
+		$this->add_control(
 			'more_options',
 			[
-				'label' => __( 'Displayed if collapsible activity is available', 'plugin-name' ),
+				'label' => __( 'Toggle Button', 'plugin-name' ),
+				'description' => __( 'Displayed if collapsible activity is available', 'plugin-name' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -355,6 +372,24 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 						'icon' => 'fa fa-align-right',
 					]
 				],
+				'default' => 'left'
+			]
+		);
+		$this->add_control(
+			'title_toggler_alignment',
+			[
+				'label' => __( 'Toggle Button Alignment', 'elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __( 'Left', 'elementor' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'right' => [
+						'title' => __( 'Right', 'elementor' ),
+						'icon' => 'fa fa-align-right',
+					]
+				],
 				'default' => 'right'
 			]
 		);
@@ -363,7 +398,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			[
 				'name' => 'title_text_typography',
 				'label' => __('Text typography'),
-				'selector' => '{{WRAPPER}} .ecll-title-text',
+				'selector' => '{{WRAPPER}} .ecll-title-text-inner',
 				'fields_options' => [
 					'font_style' => [
 						'default' => 'italic',
@@ -406,6 +441,58 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				        ]
 					],
 					'line_height' => [
+						'condition' => [
+				            'not' => 'equal'
+				        ]
+					],
+					'font_weight' => [
+						'condition' => [
+				            'not' => 'equal'
+				        ]
+					]
+				]
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'title_toggler_typography',
+				'label' => __('Toggle Button typography'),
+				'selector' => '{{WRAPPER}} .ecll-title-toggler',
+				'fields_options' => [
+					'font_family' => [
+						'default' => 'default',
+						'condition' => [
+				            'not' => 'equal'
+				        ]
+					],
+					'text_transform' => [
+						'default' => 'default',
+						'condition' => [
+				            'not' => 'equal'
+				        ]
+					],
+					'letter_spacing' => [
+						'condition' => [
+				            'not' => 'equal'
+				        ]
+					],
+					'font_style' => [
+						'condition' => [
+				            'not' => 'equal'
+				        ]
+					],
+					'text_decoration' => [
+						'condition' => [
+				            'not' => 'equal'
+				        ]
+					],
+					'line_height' => [
+						'condition' => [
+				            'not' => 'equal'
+				        ]
+					],
+					'font_weight' => [
 						'condition' => [
 				            'not' => 'equal'
 				        ]
@@ -469,15 +556,28 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
         $this->add_control(
 			'title_text_color',
 			[
-				'label' => __( 'Text Color', 'elementor' ),
+				'label' => __( 'Text/Button Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .ecll-title-text, {{WRAPPER}} .ecll-title-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-title-text-inner, {{WRAPPER}} .ecll-title-toggler' => 'color: {{VALUE}};',
 				],
 				'default' => '#fff'
 			]
 		);
+		$this->add_control(
+			'title_icon_color',
+			[
+				'label' => __( 'Icon Color', 'elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .ecll-title-icon' => 'color: {{VALUE}};',
+				],
+				'default' => '#fff'
+			]
+		);
+
 		$this->add_control(
 			'title_background_color',
 			[
@@ -511,10 +611,22 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
         $this->add_control(
 			'title_text_color_hover',
 			[
-				'label' => __( 'Text Color', 'elementor' ),
+				'label' => __( 'Text/Button Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .ecll-title:hover .ecll-title-text, {{WRAPPER}} .ecll-title:hover .ecll-title-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-title:hover .ecll-title-text-inner, {{WRAPPER}} .ecll-title:hover .ecll-title-toggler' => 'color: {{VALUE}};',
+				],
+			]
+		);
+		
+		$this->add_control(
+			'title_icon_color_hover',
+			[
+				'label' => __( 'Icon Color', 'elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .ecll-title:hover .ecll-title-icon' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -948,6 +1060,9 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Expand Button', 'elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'show_expand_btn' => 'yes'
+				]
 			]
 		);
 
@@ -1166,9 +1281,16 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			$this->add_render_attribute( 'title-text', 'class', [ 'ecll-align-'. $settings['title_text_alignment'] ] );
 		}
 
-		$this->add_render_attribute( 'title-icon', 'class', [ 'ecll-title-icon' ] );
+		$this->add_render_attribute( 'title-text-inner', 'class', [ 'ecll-title-text-inner' ] );
+
+		$this->add_render_attribute( 'title-icon', 'class', [ $settings['title_icon']['value'], 'ecll-title-icon' ] );
 		if ( ! empty( $settings['title_icon_alignment'] ) ) {
 			$this->add_render_attribute( 'title-icon', 'class', [ 'ecll-align-icon-'. $settings['title_icon_alignment'] ] );
+		}
+
+		$this->add_render_attribute( 'title-toggler', 'class', [ 'ecll-title-toggler' ] );
+		if ( ! empty( $settings['title_toggler_alignment'] ) ) {
+			$this->add_render_attribute( 'title-toggler', 'class', [ 'ecll-align-icon-'. $settings['title_toggler_alignment'] ] );
 		}
 
 		$this->add_render_attribute( 'title-icon-open', 'class', [ $settings['title_icon_open']['value'], 'ecll-expanded-icon' ] );
@@ -1188,7 +1310,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			}
 		}
 
-
 		$this->add_render_attribute( 'expand-text', 'class', 'ecll-expand-text' );
 		$this->add_render_attribute( 'collapse-text', 'class', 'ecll-collapse-text' );
 
@@ -1198,13 +1319,18 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			<div class="ecll-title">
 				<div class="ecll-content-wrapper">
 					<?php if ( $collapsible ) : ?>
-					<button <?php echo $this->get_render_attribute_string( 'title-icon' ); ?>>
-						<i <?php echo $this->get_render_attribute_string( 'title-icon-open' ); ?>></i>
-						<i <?php echo $this->get_render_attribute_string( 'title-icon-close' ); ?>></i>
-					</button>
+						<button <?php echo $this->get_render_attribute_string( 'title-toggler' ); ?>>
+							<i <?php echo $this->get_render_attribute_string( 'title-icon-open' ); ?>></i>
+							<i <?php echo $this->get_render_attribute_string( 'title-icon-close' ); ?>></i>
+						</button>
 					<?php endif; ?>
 					<div <?php echo $this->get_render_attribute_string( 'title-text' ); ?>>
-						<?php echo $settings['title']; ?>
+						<span <?php echo $this->get_render_attribute_string( 'title-text-inner' ); ?>>
+							<?php if ($settings['title_icon']['value']) : ?>
+								<i <?php echo $this->get_render_attribute_string( 'title-icon' ); ?>></i>
+							<?php endif; ?>
+							<?php echo $settings['title']; ?>
+						</span>
 					</div>
 				</div>
 			</div>
@@ -1302,13 +1428,25 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'class': [ 'ecll-align-' + settings.title_text_alignment ],
 			});
 		}
+		view.addRenderAttribute('title-text-inner',{
+			'class': [ 'ecll-title-text-inner' ],
+		});
 
 		view.addRenderAttribute('title-icon',{
-			'class': [ 'ecll-title-icon' ]
+			'class': [ settings.title_icon.value, 'ecll-title-icon' ]
 		});
 		if ( settings.title_icon_alignment ) {
 			view.addRenderAttribute('title-icon',{
 				'class': [ 'ecll-align-icon-' + settings.title_icon_alignment ]
+			});
+		}
+
+		view.addRenderAttribute('title-toggler',{
+			'class': [ 'ecll-title-toggler' ]
+		});
+		if ( settings.title_toggler_alignment ) {
+			view.addRenderAttribute('title-toggler',{
+				'class': [ 'ecll-align-icon-' + settings.title_toggler_alignment ]
 			});
 		}
 
@@ -1359,13 +1497,18 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			<div class="ecll-title">
 				<div class="ecll-content-wrapper">
 					<# if ( collapsible ) { #>
-					<button {{{ view.getRenderAttributeString( 'title-icon' ) }}} type="button">
+					<button {{{ view.getRenderAttributeString( 'title-toggler' ) }}} type="button">
 						<i {{{ view.getRenderAttributeString( 'title-icon-open' ) }}}></i>
 						<i {{{ view.getRenderAttributeString( 'title-icon-close' ) }}}></i>
 					</button>
 					<# } #>
 					<div {{{ view.getRenderAttributeString( 'title-text' ) }}}>
-						{{{ settings.title }}}
+						<span {{{ view.getRenderAttributeString( 'title-text-inner' ) }}}>
+							<# if ( settings.title_icon.value ) { #>
+								<i {{{ view.getRenderAttributeString( 'title-icon' ) }}}></i>
+							<# } #>
+							{{{ settings.title }}}
+						</span>
 					</div>
 				</div>
 			</div>
