@@ -1,7 +1,8 @@
 <?php
 /**
- * Class Elementor_Collapsible_Link_List_Widget
- * Custom elementor widget
+ * Custom elementor widget for creating link list.
+ * 
+ * @class Elementor_Collapsible_Link_List_Widget
  */
 
 use \Elementor\Controls_Manager;
@@ -38,6 +39,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 		$this->_link_styles_controls();
 		$this->_link_name_styles_controls();
 		$this->_link_description_styles_controls();
+		$this->_link_text_styles_controls();
 		$this->_link_icon_styles_controls();
 	}
 
@@ -254,6 +256,13 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'label' => __( 'Description', 'ecll' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'default' => __( 'Link Description' , 'ecll' ),
+				'label_block' => true,
+			]
+		);
+		$repeater->add_control(
+			'text', [
+				'label' => __( 'Link Text', 'ecll' ),
+				'type' => Controls_Manager::TEXTAREA,
 				'label_block' => true,
 			]
 		);
@@ -501,6 +510,43 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'title_icon_margin',
+			[
+				'label' => __( 'Icon Margin', 'elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .ecll-title-icon' => 'margin-right: {{RIGHT}}{{UNIT}}; margin-left: {{LEFT}}{{UNIT}};',
+				],
+				'allowed_dimensions' => 'horizontal',
+				'default' => [
+		            'unit' => 'px',
+		            'right' => 10,
+		            'left' => 10,
+		            'isLinked' => false
+				]
+			]
+		);
+		$this->add_control(
+			'title_toggler_margin',
+			[
+				'label' => __( 'Toggle Button Margin', 'elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .ecll-title-toggler' => 'margin-right: {{RIGHT}}{{UNIT}}; margin-left: {{LEFT}}{{UNIT}};',
+				],
+				'allowed_dimensions' => 'horizontal',
+				'default' => [
+		            'unit' => 'px',
+		            'right' => 5,
+		            'left' => 5,
+		            'isLinked' => false
+				]
+			]
+		);
+
         $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
@@ -713,8 +759,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-
-
         $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
@@ -733,7 +777,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} a.ecll-link-link' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ecll-link-link' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'default' => [
 		            'unit' => 'px',
@@ -750,7 +794,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'link_box_shadow',
-				'selector' => '{{WRAPPER}} a.ecll-link-link',
+				'selector' => '{{WRAPPER}} .ecll-link-link',
 				'default' => [
 		            'unit' => 'px',
 		            'top' => 0,
@@ -761,7 +805,6 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 		        ]
 			]
 		);
-
 
         $this->start_controls_tabs( 'tabs_link_style' );
 		$this->start_controls_tab(
@@ -778,7 +821,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .ecll-link-name, {{WRAPPER}} .ecll-link-description, {{WRAPPER}} .ecll-link-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-link-name, {{WRAPPER}} .ecll-link-description, {{WRAPPER}} .ecll-link-text, {{WRAPPER}} .ecll-link-icon' => 'color: {{VALUE}};',
 				],
 				'default' => '#54595F'
 			]
@@ -793,7 +836,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 					'value' => \Elementor\Scheme_Color::COLOR_4,
 				],
 				'selectors' => [
-					'{{WRAPPER}} a.ecll-link-link' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-link-link' => 'background-color: {{VALUE}};',
 				],
 				'default' => '#fff'
 			]
@@ -812,7 +855,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'label' => __( 'Text Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .ecll-link-link:hover .ecll-link-name, {{WRAPPER}} .ecll-link-link:hover .ecll-link-description, {{WRAPPER}} .ecll-link-link:hover .ecll-link-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-link-link:hover .ecll-link-name, {{WRAPPER}} .ecll-link-link:hover .ecll-link-description, {{WRAPPER}} .ecll-link-link:hover .ecll-link-text, {{WRAPPER}} .ecll-link-link:hover .ecll-link-icon' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -823,7 +866,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'label' => __( 'Background Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} a.ecll-link-link:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-link-link:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -834,7 +877,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'label' => __( 'Border Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} a.ecll-link-link:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .ecll-link-link:hover' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -849,7 +892,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} a.ecll-link-link' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ecll-link-link' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 				'default' => [
@@ -870,7 +913,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} a.ecll-link-link' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .ecll-link-link' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 				'default' => [
@@ -921,7 +964,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'link_name_typography',
-				'label' => __('Name typography'),
+				'label' => __('Typography'),
 				'selector' => '{{WRAPPER}} .ecll-link-name',
 			]
 		);
@@ -958,7 +1001,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'link_description_typography',
-				'label' => __('Description typography'),
+				'label' => __('Typography'),
 				'selector' => '{{WRAPPER}} .ecll-link-description',
 			]
 		);
@@ -970,6 +1013,84 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .ecll-link-description' => 'margin-right: {{RIGHT}}{{UNIT}}; margin-left: {{LEFT}}{{UNIT}};',
+				],
+				'allowed_dimensions' => 'horizontal',
+				'separator' => 'before',
+				'default' => [
+		            'unit' => 'px',
+		            'right' => 0,
+		            'left' => 0,
+		            'isLinked' => false
+				]
+			]
+		);
+		$this->end_controls_section();
+	}
+	protected function _link_text_styles_controls() {
+        $this->start_controls_section(
+			'link_text_style',
+			[
+				'label' => __( 'Link Text', 'elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'link_text_typography',
+				'label' => __('Typography'),
+				'selector' => '{{WRAPPER}} .ecll-link-text',
+			]
+		);
+		$this->start_controls_tabs( 'tabs_link_text_style' );
+		$this->start_controls_tab(
+			'tab_link_text_normal',
+			[
+				'label' => __( 'Normal', 'elementor' ),
+			]
+		);
+
+        $this->add_control(
+			'link_text_text_color',
+			[
+				'label' => __( 'Text Color', 'elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .ecll-link-text' => 'color: {{VALUE}};',
+				],
+				'default' => '#54595F'
+			]
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_link_text_hover',
+			[
+				'label' => __( 'Hover', 'elementor' ),
+			]
+		);
+        $this->add_control(
+			'link_text_hover_text_color',
+			[
+				'label' => __( 'Text Color', 'elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .ecll-link-link:hover .ecll-link-text' => 'color: {{VALUE}};',
+				],
+			]
+		);
+        $this->end_controls_tab();
+		$this->end_controls_tabs();
+
+
+		$this->add_control(
+			'link_text_margin',
+			[
+				'label' => __( 'Margin', 'elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors' => [
+					'{{WRAPPER}} .ecll-link-text' => 'margin-right: {{RIGHT}}{{UNIT}}; margin-left: {{LEFT}}{{UNIT}};',
 				],
 				'allowed_dimensions' => 'horizontal',
 				'separator' => 'before',
@@ -1342,7 +1463,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 						continue;
 					}
 
-					$link_icon = ! empty( $item['link_icon']['value'] ) ? $item['link_icon']['value'] : $settings['link_icon']['value'];
+					$link_icon_class = ! empty( $item['link_icon']['value'] ) ? $item['link_icon']['value'] : $settings['link_icon']['value'];
 
 					$link_element = 'link-' . $item['_id'];
 					$this->add_render_attribute( $link_element, 'class', [ 'ecll-link-link' ] );
@@ -1354,7 +1475,14 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 							<div class="ecll-content-wrapper">
 								<div class="ecll-link-name"><?php echo $item['name']; ?></div>
 								<div class="ecll-link-description"><?php echo $item['description']; ?></div>
-								<div class="ecll-link-icon"><i class="<?php echo $link_icon; ?>"></i></div>
+
+								<?php if (! empty($item['text'])) : ?>
+									<div class="ecll-link-text"><?php echo $item['text']; ?></div>
+								<?php endif; ?>
+
+								<?php if (! empty($link_icon_class)) : ?>
+									<div class="ecll-link-icon"><i class="<?php echo $link_icon_class; ?>"></i></div>
+								<?php endif; ?>
 							</div>
 						</a>
 					</li>
@@ -1370,7 +1498,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 						continue;
 					}
 
-					$link_icon = ! empty( $item['link_icon']['value'] ) ? $item['link_icon']['value'] : $settings['link_icon']['value'];
+					$link_icon_class = ! empty( $item['link_icon']['value'] ) ? $item['link_icon']['value'] : $settings['link_icon']['value'];
 
 					$link_element = 'link-' . $item['_id'];
 					$this->add_render_attribute( $link_element, 'class', [ 'ecll-link-link' ] );
@@ -1382,7 +1510,14 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 							<div class="ecll-content-wrapper">
 								<div class="ecll-link-name"><?php echo $item['name']; ?></div>
 								<div class="ecll-link-description"><?php echo $item['description']; ?></div>
-								<div class="ecll-link-icon"><i class="<?php echo $link_icon; ?>"></i></div>
+
+								<?php if (! empty($item['text'])) : ?>
+									<div class="ecll-link-text"><?php echo $item['text']; ?></div>
+								<?php endif; ?>
+
+								<?php if (! empty($link_icon_class)) : ?>
+									<div class="ecll-link-icon"><i class="<?php echo $link_icon_class; ?>"></i></div>
+								<?php endif; ?>
 							</div>
 						</a>
 					</li>
@@ -1517,7 +1652,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				<ul class="ecll-primary-links">
 				<#
 					_.each( primary_links, function( item, index ) {
-						let link_icon = item.link_icon.value ? item.link_icon.value : settings.link_icon.value;
+						let link_icon_class = item.link_icon.value ? item.link_icon.value : settings.link_icon.value;
 
 						let link_element = 'link-' + item._id;
 						view.addRenderAttribute(link_element, {
@@ -1526,13 +1661,18 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 						view.addRenderAttribute(link_element, item.link);
 					#>
 					<li class="ecll-link-item elementor-repeater-item-{{{ item._id }}}">
-						<a {{{ view.getRenderAttributeString( link_element ) }}}>
+						<div {{{ view.getRenderAttributeString( link_element ) }}}>
 							<div class="ecll-content-wrapper">
 								<div class="ecll-link-name" >{{{ item.name }}}</div>
 								<div class="ecll-link-description">{{{ item.description }}}</div>
-								<div class="ecll-link-icon"><i class="{{{ link_icon }}}"></i></div>
+								<# if (item.text !== '') { #>
+									<div class="ecll-link-text">{{{ item.text }}}</div>
+								<# } #>
+								<# if (link_icon_class !== '') { #>
+									<div class="ecll-link-icon"><i class="{{{ link_icon_class }}}"></i></div>
+								<# } #>
 							</div>
-						</a>
+						</div>
 					</li>
 					<#
 					} );
@@ -1543,7 +1683,7 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 				<ul {{{ view.getRenderAttributeString( 'hidden-links' ) }}}>
 					<#
 					_.each( settings.links.slice(settings.expand_limit), function( item, index ) {
-						let link_icon = item.link_icon.value ? item.link_icon.value : settings.link_icon.value;
+						let link_icon_class = item.link_icon.value ? item.link_icon.value : settings.link_icon.value;
 
 						let link_element = 'link-' + item._id;
 						view.addRenderAttribute(link_element, {
@@ -1552,13 +1692,18 @@ class Elementor_Collapsible_Link_List_Widget extends \Elementor\Widget_Base {
 						view.addRenderAttribute(link_element, item.link);
 						#>
 					<li class="ecll-link-item elementor-repeater-item-{{{ item._id }}}">
-						<a {{{ view.getRenderAttributeString( link_element ) }}}>
+						<div {{{ view.getRenderAttributeString( link_element ) }}}>
 							<div class="ecll-content-wrapper">
 								<div class="ecll-link-name">{{{ item.name }}}</div>
 								<div class="ecll-link-description">{{{ item.description }}}</div>
-								<div class="ecll-link-icon"><i class="{{{ link_icon }}}"></i></div>
+								<# if (item.text !== '') { #>
+									<div class="ecll-link-text">{{{ item.text }}}</div>
+								<# } #>
+								<# if (link_icon_class !== '') { #>
+									<div class="ecll-link-icon"><i class="{{{ link_icon_class }}}"></i></div>
+								<# } #>
 							</div>
-						</a>
+						</div>
 					</li>
 					<#
 					} );

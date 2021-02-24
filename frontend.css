@@ -27,6 +27,9 @@
     -o-transition: all .3s;
     transition: all .3s;
 }
+a.ecll-link-link{
+	text-decoration: none !important;
+}
 .ecll-expand-btn {
 	width: auto;
 	display: inline-block;
@@ -41,12 +44,14 @@
     -ms-flex-pack: center;
     justify-content: center;
 }
-.ecll-title .ecll-content-wrapper{
+.ecll-title .ecll-content-wrapper,
+.ecll-link-link .ecll-content-wrapper{
 	align-items: center;
 }
 .ecll-title-text,
 .ecll-link-name,
-.ecll-link-description {
+.ecll-link-description,
+.ecll-link-text {
     -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
@@ -62,6 +67,12 @@
 	-webkit-order: 8;
     -ms-flex-order: 8;
     order: 8;
+	flex-grow: 0;
+}
+.ecll-link-text {
+	-webkit-order: 12;
+    -ms-flex-order: 12;
+    order: 12;
 	flex-grow: 0;
 }
 .ecll-link-description {
@@ -111,12 +122,10 @@
 	align-items: center;
 }
 .ecll-title .ecll-title-icon {
-	margin-left: 0;
-	margin-right: 20px;
+	margin-right: 5px;
 }
 .ecll-title-icon.ecll-align-icon-right{
- 	margin-left: 20px;
-	margin-right: 0;
+ 	margin-left: 5px;
 	-webkit-box-ordinal-group: 6;
 	-webkit-order: 5;
 	-ms-flex-order: 5;
@@ -127,4 +136,12 @@
 }
 .ecll-expand-wrapper{
 	text-align: center;
+}
+
+
+.ecll-link-description p{
+	margin: 0 !important;
+}
+.ecll-link-description a {
+	text-decoration: none !important;
 }

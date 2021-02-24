@@ -3,7 +3,7 @@
  * Plugin Name:       Elementor Collapsible Link List
  * Plugin URI:        https://w4dev.com
  * Description:       Custom widget for elementor
- * Version:           1.2.2
+ * Version:           1.2.3
  * Requires at least: 5.5.3
  * Requires PHP:      7.2
  * Author:            Shazzad Hossain Khan
